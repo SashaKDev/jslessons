@@ -18,3 +18,5 @@ function countPositivesSumNegatives(input) {
 }
 
 console.log(countPositivesSumNegatives(array));
+
+console.log('Checking line...')
