@@ -1,5 +1,5 @@
-const arr = [1, 2, 3];
+const names = ['Alex', 'Bob', 'Ivan', 'Sasha']
+const total = names.push('Nina')
 
-arr[10] = 11;
-
-console.log(arr);
+console.log('names', names) // [ 'Alex', 'Bob', 'Ivan', 'Sasha', 'Nina' ]
+console.log('total', total) //5
