@@ -19,3 +19,12 @@
 //
 // console.log(reversedNumber);
 //----------------------------------------------------------------------
+//concat method
+
+const arr = [1, 2, 3];
+const arr2 = [[4,5], [6,7]];
+const arr3 = [[[8,9]]]
+
+const result = arr.concat(arr2, arr3).flat(Infinity);
+
+console.log(result);
