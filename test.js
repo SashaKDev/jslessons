@@ -1,5 +1,5 @@
 const names = ['Alex', 'Bob', 'Ivan', 'Sasha']
-const reversed = [];
+const reversed = names.reverse()
 
 console.log('names', names) // reverse мутировал исходный массив и мы
 // получили: [ 'Sasha', 'Ivan', 'Bob', 'Alex' ]
