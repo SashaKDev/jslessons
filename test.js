@@ -71,40 +71,58 @@
 // const closureFunc = outer();
 // executor(closureFunc);
 
-const sqr = (num) => {
-    console.log('call');
-    return num * num;
+// const sqr = (num) => {
+//     console.log('call');
+//     return num * num;
+// }
+//
+// const sum = (a, b) => {
+//     console.log('call');
+//     return a + b;
+// }
+//
+//
+//
+// const memoize = (fn) => {
+//     const cash = {};
+//     return (...args) => {
+//
+//         if (cash[args.toString()]){
+//             return cash[args.toString()];
+//         } else {
+//             return cash[args.toString()] = fn(...args);
+//
+//         }
+//     }
+// }
+//
+// const fastSqr = memoize(sqr)
+// const fastSum = memoize(sum)
+//
+// console.log(fastSum(1, 2));
+// console.log(fastSum(1, 2));
+//
+// console.log(fastSqr(5));
+// console.log(fastSqr(5));
+// console.log(fastSqr(6));
+// console.log(fastSqr(7));
+// console.log(fastSqr(6));
+
+function doubleLater(x, cb) {
+    setTimeout(() => {
+        cb(x * 2);
+    }, 500);
 }
 
-const sum = (a, b) => {
-    console.log('call');
-    return a + b;
+function doubleLaterAsync(x) {
+    return new Promise((resolve) => {
+        doubleLater(x, (result) => {
+            resolve(result);
+        });
+    })
 }
 
+const result = await doubleLaterAsync(5);
+console.log(result); // 10
 
-
-const memoize = (fn) => {
-    const cash = {};
-    return (...args) => {
-
-        if (cash[args.toString()]){
-            return cash[args.toString()];
-        } else {
-            return cash[args.toString()] = fn(...args);
-
-        }
-    }
-}
-
-const fastSqr = memoize(sqr)
-const fastSum = memoize(sum)
-
-console.log(fastSum(1, 2));
-console.log(fastSum(1, 2));
-
-console.log(fastSqr(5));
-console.log(fastSqr(5));
-console.log(fastSqr(6));
-console.log(fastSqr(7));
-console.log(fastSqr(6));
 
