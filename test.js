@@ -125,5 +125,23 @@
 // const result = await doubleLaterAsync(5);
 // console.log(result); // 10
 // -----------------------------------------------------
+//
+// function addLater(a, b, cb) {
+//     setTimeout(() => {
+//         cb(a + b);
+//     }, 500);
+// }
+//
+// function addLaterAsync(a, b) {
+//     return new Promise(resolve => {
+//         addLater(a, b, (result) => {
+//             resolve(result);
+//         });
+//     })
+// }
+//
+// const sum = await addLaterAsync(2, 3);
+// console.log(sum); // ?
+// ---------------------------------------------------------
 
 
