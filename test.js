@@ -144,32 +144,62 @@
 // console.log(sum); // ?
 // ---------------------------------------------------------
 
-function addLater(a, b, cb) {
-    setTimeout(() => cb(a + b), 300);
+// function addLater(a, b, cb) {
+//     setTimeout(() => cb(a + b), 300);
+// }
+//
+// function multiplyLater(a, b, cb) {
+//     setTimeout(() => cb(a * b), 300);
+// }
+//
+// function addLaterAsync(a, b) {
+//     return new Promise(resolve => {
+//         addLater(a, b, (sum) => {
+//             resolve(sum)
+//         });
+//     })
+// }
+//
+// function multiplyLaterAsync(a, b) {
+//     return new Promise(resolve => {
+//         multiplyLater(a, b, (mul) => {
+//             resolve(mul)
+//         })
+//     })
+// }
+//
+// const sum = await addLaterAsync(2, 3);
+// const result = await multiplyLaterAsync(sum, 4);
+// console.log(result); // ?
+// ----------------------------------------------------
+
+function divideLater(a, b, cb) {
+    setTimeout(() => {
+        if (b === 0) {
+            cb(new Error("Делить на ноль нельзя")); // ошибка
+        } else {
+            cb(null, a / b); // первый аргумент = ошибка
+        }
+    }, 300);
 }
 
-function multiplyLater(a, b, cb) {
-    setTimeout(() => cb(a * b), 300);
-}
-
-function addLaterAsync(a, b) {
-    return new Promise(resolve => {
-        addLater(a, b, (sum) => {
-            resolve(sum)
+function divideLaterAsync(a, b) {
+    return new Promise((resolve, reject) => {
+        divideLater(a, b, (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
         });
     })
 }
 
-function multiplyLaterAsync(a, b) {
-    return new Promise(resolve => {
-        multiplyLater(a, b, (mul) => {
-            resolve(mul)
-        })
-    })
+try {
+    const result = await divideLaterAsync(10, 2);
+    console.log(result);
+} catch (err) {
+    console.log("Ошибка:", err.message);
 }
-
-const sum = await addLaterAsync(2, 3);
-const result = await multiplyLaterAsync(sum, 4);
-console.log(result); // ?
 
 
