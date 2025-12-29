@@ -203,8 +203,52 @@
 // }
 // ----------------------------------------
 
+// function addLater(a, b, cb) {
+//     setTimeout(() => cb(null, a + b), 300);
+// }
+//
+// function divideLater(a, b, cb) {
+//     setTimeout(() => {
+//         if (b === 0) cb(new Error("Делить на ноль нельзя"));
+//         else cb(null, a / b);
+//     }, 300);
+// }
+//
+// function addLaterAsync(a, b){
+//     return new Promise((resolve) => {
+//         addLater(a, b, (err, result) => {
+//             resolve(result);
+//         });
+//     })
+// }
+//
+// function divideLaterAsync(a, b) {
+//     return new Promise((resolve, reject) => {
+//         divideLater(a, b, (err, result) => {
+//             if(err) {
+//                 reject(err);
+//             } else {
+//                 resolve(result);
+//             }
+//         })
+//     })
+// }
+//
+// try {
+//     const sum = await addLaterAsync(2, 3);
+//     const result = await divideLaterAsync(sum, 1); // здесь ошибка
+//     console.log(result);
+// } catch (err) {
+//     console.log("Ошибка:", err.message);
+// }
+// ------------------------------
+
 function addLater(a, b, cb) {
     setTimeout(() => cb(null, a + b), 300);
+}
+
+function multiplyLater(a, b, cb) {
+    setTimeout(() => cb(null, a * b), 300);
 }
 
 function divideLater(a, b, cb) {
@@ -214,18 +258,10 @@ function divideLater(a, b, cb) {
     }, 300);
 }
 
-function addLaterAsync(a, b){
-    return new Promise((resolve) => {
-        addLater(a, b, (err, result) => {
-            resolve(result);
-        });
-    })
-}
-
-function divideLaterAsync(a, b) {
+function addLaterAsync (a, b) {
     return new Promise((resolve, reject) => {
-        divideLater(a, b, (err, result) => {
-            if(err) {
+        addLater(a, b, (err, result) => {
+            if (err) {
                 reject(err);
             } else {
                 resolve(result);
@@ -234,12 +270,38 @@ function divideLaterAsync(a, b) {
     })
 }
 
+function multiplyLaterAsync (a, b) {
+    return new Promise((resolve, reject) => {
+        multiplyLater(a, b, (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result)
+            }
+        })
+    })
+}
+
+function divideLaterAsync (a, b) {
+    return new Promise((resolve, reject) => {
+        divideLater(a, b, (err, result) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(result)
+            }
+        })
+    })
+}
+
 try {
     const sum = await addLaterAsync(2, 3);
-    const result = await divideLaterAsync(sum, 1); // здесь ошибка
+    const product =  await multiplyLaterAsync(sum, 4);
+    const result = await divideLaterAsync(product, 1);
     console.log(result);
 } catch (err) {
     console.log("Ошибка:", err.message);
 }
+
 
 
