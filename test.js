@@ -144,4 +144,32 @@
 // console.log(sum); // ?
 // ---------------------------------------------------------
 
+function addLater(a, b, cb) {
+    setTimeout(() => cb(a + b), 300);
+}
+
+function multiplyLater(a, b, cb) {
+    setTimeout(() => cb(a * b), 300);
+}
+
+function addLaterAsync(a, b) {
+    return new Promise(resolve => {
+        addLater(a, b, (sum) => {
+            resolve(sum)
+        });
+    })
+}
+
+function multiplyLaterAsync(a, b) {
+    return new Promise(resolve => {
+        multiplyLater(a, b, (mul) => {
+            resolve(mul)
+        })
+    })
+}
+
+const sum = await addLaterAsync(2, 3);
+const result = await multiplyLaterAsync(sum, 4);
+console.log(result); // ?
+
 
