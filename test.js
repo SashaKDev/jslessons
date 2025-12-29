@@ -173,30 +173,70 @@
 // console.log(result); // ?
 // ----------------------------------------------------
 
+// function divideLater(a, b, cb) {
+//     setTimeout(() => {
+//         if (b === 0) {
+//             cb(new Error("Делить на ноль нельзя")); // ошибка
+//         } else {
+//             cb(null, a / b); // первый аргумент = ошибка
+//         }
+//     }, 300);
+// }
+//
+// function divideLaterAsync(a, b) {
+//     return new Promise((resolve, reject) => {
+//         divideLater(a, b, (err, result) => {
+//             if (err) {
+//                 reject(err);
+//             } else {
+//                 resolve(result);
+//             }
+//         });
+//     })
+// }
+//
+// try {
+//     const result = await divideLaterAsync(10, 2);
+//     console.log(result);
+// } catch (err) {
+//     console.log("Ошибка:", err.message);
+// }
+// ----------------------------------------
+
+function addLater(a, b, cb) {
+    setTimeout(() => cb(null, a + b), 300);
+}
+
 function divideLater(a, b, cb) {
     setTimeout(() => {
-        if (b === 0) {
-            cb(new Error("Делить на ноль нельзя")); // ошибка
-        } else {
-            cb(null, a / b); // первый аргумент = ошибка
-        }
+        if (b === 0) cb(new Error("Делить на ноль нельзя"));
+        else cb(null, a / b);
     }, 300);
+}
+
+function addLaterAsync(a, b){
+    return new Promise((resolve) => {
+        addLater(a, b, (err, result) => {
+            resolve(result);
+        });
+    })
 }
 
 function divideLaterAsync(a, b) {
     return new Promise((resolve, reject) => {
         divideLater(a, b, (err, result) => {
-            if (err) {
+            if(err) {
                 reject(err);
             } else {
                 resolve(result);
             }
-        });
+        })
     })
 }
 
 try {
-    const result = await divideLaterAsync(10, 2);
+    const sum = await addLaterAsync(2, 3);
+    const result = await divideLaterAsync(sum, 1); // здесь ошибка
     console.log(result);
 } catch (err) {
     console.log("Ошибка:", err.message);
