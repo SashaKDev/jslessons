@@ -107,22 +107,23 @@
 // console.log(fastSqr(6));
 // console.log(fastSqr(7));
 // console.log(fastSqr(6));
-
-function doubleLater(x, cb) {
-    setTimeout(() => {
-        cb(x * 2);
-    }, 500);
-}
-
-function doubleLaterAsync(x) {
-    return new Promise((resolve) => {
-        doubleLater(x, (result) => {
-            resolve(result);
-        });
-    })
-}
-
-const result = await doubleLaterAsync(5);
-console.log(result); // 10
+// ---------------------------------------------------
+// function doubleLater(x, cb) {
+//     setTimeout(() => {
+//         cb(x * 2);
+//     }, 500);
+// }
+//
+// function doubleLaterAsync(x) {
+//     return new Promise((resolve) => {
+//         doubleLater(x, (result) => {
+//             resolve(result);
+//         });
+//     })
+// }
+//
+// const result = await doubleLaterAsync(5);
+// console.log(result); // 10
+// -----------------------------------------------------
 
 
