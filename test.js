@@ -304,13 +304,40 @@
 // }
 // ------------------------------------------------
 
-function delay (ms) {
-    return new Promise ((resolve) => {
-        setTimeout(() => {
-            resolve();
-        }, ms)
-    })
-}
+// function delay (ms) {
+//     return new Promise ((resolve) => {
+//         setTimeout(() => {
+//             resolve();
+//         }, ms)
+//     })
+// }
+//
+// delay(1000).then(() => console.log('done'))
+// --------------------------------------------------
 
-delay(1000).then(() => console.log('done'))
+const promise1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        // resolve()
+        reject('reject1');
+    }, 1000);
+})
+
+promise1
+    .catch((t) => {
+        console.log(t + 'catch1');
+        return 'catch1';
+    })
+    .catch((t) => {
+        console.log(t + 'catch2')
+        return 'catch2';
+    })
+    .then((t) => {
+        console.log(t + 'then1')
+        return 'then1';
+    })
+    .finally((t) => {
+        console.log(t + 'finally1')
+        return 'finally1';
+    })
+    .then((t) => {console.log(t)})
 
